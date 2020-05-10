@@ -22,4 +22,11 @@ public class EnemyMovement : MonoBehaviour
         }
         print("Ending patrol");
     }
+
+    // Figure out where this should go
+    // and how it can function
+    private void OnParticleCollision(GameObject other)
+    {
+        print("OW!");
+    }
 }
