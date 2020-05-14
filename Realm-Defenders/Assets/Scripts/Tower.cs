@@ -8,30 +8,19 @@ public class Tower : MonoBehaviour
     [SerializeField] Transform objectToPan;
     [SerializeField] Transform targetEnemy;
     [SerializeField] GameObject bullet;
-
-    bool isEnemyClose;
+    [SerializeField] ParticleSystem projectileParticle; // same thing as bullet
+    [SerializeField] float attackRange = 10;  
 
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(gameObject.transform.position, targetEnemy.transform.position) / 10;
-        if (distance <= 10) {
-            isEnemyClose = true;
-        }
-        else
-        {
-            isEnemyClose = false;
-        }
-
-
-        if (isEnemyClose)
+        if (targetEnemy)
         {
             TrackTarget();
-            ProccessFiring(true);
-        }
-        else
+            FireAtEnemy();
+        } else
         {
-            ProccessFiring(false);
+            Shoot(false);
         }
     }
 
@@ -40,7 +29,21 @@ public class Tower : MonoBehaviour
         objectToPan.LookAt(targetEnemy);
     }
 
-    private void ProccessFiring(bool isActive)
+    private void FireAtEnemy()
+    {
+        float distance = Vector3.Distance(targetEnemy.transform.position, gameObject.transform.position);
+
+        if (distance <= attackRange)
+        {
+            Shoot(true);
+        }
+        else
+        {
+            Shoot(false);
+        }
+    }
+
+    private void Shoot(bool isActive)
     {
         var emissionModule = bullet.GetComponent<ParticleSystem>().emission;
         emissionModule.enabled = isActive;
