@@ -34,7 +34,6 @@ public class Pathfinder : MonoBehaviour
     private void CalculatePath()
     {
         LoadBlocks();
-        ColorStartAndEnd();
         BreadthFirstSearch();
         CreatePath();
     }
@@ -99,13 +98,6 @@ public class Pathfinder : MonoBehaviour
         {
             // do nothing
         }
-    }
-
-    private void ColorStartAndEnd()
-    {
-        // todo consider moving out
-        startWaypoint.SetTopColor(Color.white);
-        endWaypoint.SetTopColor(Color.cyan);
     }
 
     private void LoadBlocks()
