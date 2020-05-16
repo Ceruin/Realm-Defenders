@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [Range(0.1f, 120f)]
     [SerializeField] float secondsBetweenSpawns;
     [SerializeField] EnemyMovement Enemy;
-    int totalEnemies = 100;
 
     // Update is called once per frame
     void Start()
@@ -16,11 +16,9 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator RepeatedlySpawnEnemies()
     {
-        while (totalEnemies > 0) // true for forever
+        while (true) // forever
         {
-            print("Spawning");
-            Instantiate(Enemy);
-            totalEnemies--;
+            Instantiate(Enemy, transform.position, Quaternion.identity);
             yield return new WaitForSeconds(secondsBetweenSpawns);
         }
     }

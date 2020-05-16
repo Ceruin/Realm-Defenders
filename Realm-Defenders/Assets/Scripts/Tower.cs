@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
+    // Parameters of the tower
     [SerializeField] Transform objectToPan;
-    [SerializeField] Transform targetEnemy;
-    [SerializeField] GameObject bullet;
-    [SerializeField] ParticleSystem projectileParticle; // same thing as bullet
-    [SerializeField] float attackRange = 10;  
+    [SerializeField] ParticleSystem projectileParticle;
+    [SerializeField] float attackRange = 10;
+
+    // State of the tower
+    Transform targetEnemy;
 
     // Update is called once per frame
     void Update()
     {
+        SetTargetEnemy();
         if (targetEnemy)
         {
             TrackTarget();
@@ -22,6 +25,35 @@ public class Tower : MonoBehaviour
         {
             Shoot(false);
         }
+    }
+
+    private void SetTargetEnemy()
+    {
+        var sceneEnemies = FindObjectsOfType<EnemyDamage>();
+        if (sceneEnemies.Length == 0) { return; }
+
+        Transform closestEnemy = sceneEnemies[0].transform;
+
+        foreach (EnemyDamage testEnemy in sceneEnemies)
+        {
+            closestEnemy = GetClosest(closestEnemy, testEnemy.transform);
+        }
+
+        targetEnemy = closestEnemy;
+    }
+
+    private Transform GetClosest(Transform transformA, Transform transformB)
+    {
+        float distToA = Vector3.Distance(transformA.position, gameObject.transform.position);
+        float distToB = Vector3.Distance(transformB.position, gameObject.transform.position);
+
+        if (distToA < distToB)
+        {
+            return transformA;
+        }
+
+        return transformB;
+        
     }
 
     private void TrackTarget()
@@ -45,7 +77,7 @@ public class Tower : MonoBehaviour
 
     private void Shoot(bool isActive)
     {
-        var emissionModule = bullet.GetComponent<ParticleSystem>().emission;
+        var emissionModule = projectileParticle.emission;
         emissionModule.enabled = isActive;
     }
 }
