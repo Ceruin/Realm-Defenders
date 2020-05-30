@@ -18,7 +18,8 @@ public class PlayerHealth : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         GetComponent<AudioSource>().PlayOneShot(baseHurtSFX);
-        health -= healthDecrease;
+        if (health > 0)
+            health -= healthDecrease;
         healthText.text = health.ToString();
     }
 }

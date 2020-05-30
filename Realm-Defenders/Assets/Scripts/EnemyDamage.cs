@@ -11,11 +11,11 @@ public class EnemyDamage : MonoBehaviour
     [SerializeField] AudioClip enemyHitSFX;
     [SerializeField] AudioClip enemyDeathSFX;
 
-    AudioSource myAudioSoure;
+    AudioSource myAudioSource;
 
     private void Start()
     {
-        myAudioSoure = GetComponent<AudioSource>();
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     private void OnParticleCollision(GameObject other)
@@ -40,9 +40,9 @@ public class EnemyDamage : MonoBehaviour
     {     
         var deathFX = Instantiate(deathParticlePrefab, transform.position, Quaternion.identity);
         deathFX.Play();
-        //AudioSource.PlayClipAtPoint(enemyDeathSFX, transform.position);
 
         Destroy(deathFX.gameObject, deathFX.main.duration);
+        AudioSource.PlayClipAtPoint(enemyDeathSFX, Camera.main.transform.position);
         Destroy(gameObject);        
     }
 }
