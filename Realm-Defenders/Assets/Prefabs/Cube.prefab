@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7826838991433302910}
   - component: {fileID: 1958860742607268287}
   - component: {fileID: 6619760325105921637}
+  - component: {fileID: -5664263364715648133}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -62,8 +63,6 @@ MonoBehaviour:
   isExplored: 0
   exploredFrom: {fileID: 0}
   isPlaceable: 1
-  towerPrefab: {fileID: 6486844587498749495, guid: ec710ddf22e20b743a5c710d698c9ad1,
-    type: 3}
 --- !u!65 &6619760325105921637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -77,6 +76,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: -5, z: 0}
+--- !u!114 &-5664263364715648133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1562422676092035320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5261bde65872a994eb03495b4afd6d04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: b28c0c89e5ef88642912a86889f13710, type: 3}
+  cursorMode: 0
+  hotSpot: {x: 0, y: 0}
 --- !u!1 &3740914823222320550
 GameObject:
   m_ObjectHideFlags: 0
